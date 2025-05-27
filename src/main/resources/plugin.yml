@@ -1,0 +1,9 @@
+name: MacePowers
+version: '0.0.1'
+main: me.jakes.macePowers.MacePowers
+api-version: '1.21'
+
+commands:
+  macepowers:
+    description: Mace Powers command
+    usage: /macepowers give <item>
