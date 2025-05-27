@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class ArachnidsTreasureHandler extends CustomMaceHandler {
 
-    HashMap<UUID, Long> playerCobwebTimeout = new HashMap<>();
+    private static final HashMap<UUID, Long> playerCobwebTimeout = new HashMap<>();
 
     private static final int cobwebTimeoutSeconds = 20;
 
@@ -43,13 +43,13 @@ public class ArachnidsTreasureHandler extends CustomMaceHandler {
         }
     }
 
-    private void cancelCobweb(BlockPlaceEvent event) {
+    private static void cancelCobweb(BlockPlaceEvent event) {
         event.setCancelled(true);
         event.getBlock().getWorld().spawnParticle(Particle.LARGE_SMOKE, event.getBlock().getLocation(), 1);
         event.getBlock().getWorld().playSound(event.getBlock().getLocation(), Sound.BLOCK_CANDLE_EXTINGUISH, 1, 1);
     }
 
-    private void checkNearbyEntities(BlockPlaceEvent event) {
+    private static void checkNearbyEntities(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         Location loc = player.getLocation();
         for (Entity entity : player.getNearbyEntities(cobwebRadius, cobwebRadius, cobwebRadius)) {
@@ -65,12 +65,16 @@ public class ArachnidsTreasureHandler extends CustomMaceHandler {
 
     @Override
     protected void applyAbility(Player player) {
+        cobWebAbility(player);
+    }
+
+    public static void cobWebAbility(Player player) {
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_THUNDER, 1.5f, .75f);
         clearCobwebs(player);
         playerCobwebTimeout.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
-    private void clearCobwebs(Player player) {
+    private static void clearCobwebs(Player player) {
 
         World world = player.getWorld();
         Location center = player.getLocation();

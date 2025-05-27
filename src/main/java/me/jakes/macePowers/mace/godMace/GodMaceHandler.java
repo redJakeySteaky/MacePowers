@@ -72,7 +72,10 @@ public class GodMaceHandler extends CustomMaceHandler {
 
     @Override
     protected void applyAbility(Player player) {
-        player.sendMessage("ability");
+        switch (maceChosen) {
+            case 0:
+                break;
+        }
     }
 
     private void openGUI(Player player) {

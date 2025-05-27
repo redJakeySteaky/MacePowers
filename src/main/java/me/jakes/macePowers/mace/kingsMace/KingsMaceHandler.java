@@ -16,6 +16,10 @@ public class KingsMaceHandler extends CustomMaceHandler {
 
     @Override
     protected void applyAbility(Player player) {
+        strengthAbility(player);
+    }
+
+    public static void strengthAbility(Player player) {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_SPAWN, .5f, 1);
         player.getWorld().spawnParticle(Particle.EXPLOSION_EMITTER, player.getLocation().add(new Vector(0, 1, 0)), 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 20 * 60, 4));

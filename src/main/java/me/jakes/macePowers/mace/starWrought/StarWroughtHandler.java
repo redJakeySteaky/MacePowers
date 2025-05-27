@@ -17,6 +17,11 @@ public class StarWroughtHandler extends CustomMaceHandler {
 
     @Override
     protected void applyAbility(Player player) {
+        boostAbility(player);
+    }
+
+
+    public static void boostAbility(Player player) {
         player.setVelocity(new Vector(0, 2, 0));
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_MACE_SMASH_GROUND_HEAVY, 1.5f, .6f);
         player.getWorld().spawnParticle(Particle.GUST_EMITTER_LARGE, player.getLocation(), 2);
