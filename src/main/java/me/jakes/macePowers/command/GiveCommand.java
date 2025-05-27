@@ -1,4 +1,4 @@
-package me.jakes.macePowers.mace.command;
+package me.jakes.macePowers.command;
 
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
 import me.jakes.macePowers.mace.godMace.GodMace;

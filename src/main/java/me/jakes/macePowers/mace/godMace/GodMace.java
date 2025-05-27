@@ -11,7 +11,7 @@ public class GodMace extends CustomMace {
     private static final GodMace instance = new GodMace();
 
     protected GodMace() {
-        super(Component.text("GOD Mace", NamedTextColor.GRAY, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "god_mace"), 5, 10);
+        super(Component.text("GOD Mace", NamedTextColor.GRAY, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "god_mace"), 180, 10);
     }
 
     public static GodMace getInstance() {
@@ -19,6 +19,6 @@ public class GodMace extends CustomMace {
     }
 
     public int getGuiCooldownSeconds() {
-        return 10;
+        return 300;
     }
 }

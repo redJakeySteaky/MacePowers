@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 //this class has global(static) cooldown features built-in for a main ability and a dash ability
-public abstract class CustomMaceListener implements Listener {
+public abstract class CustomMaceHandler implements Listener {
 
     private static final HashMap<UUID, Long> playerMessageTimestamp = new HashMap<>();
 
@@ -30,7 +30,7 @@ public abstract class CustomMaceListener implements Listener {
 
     protected final CustomMace customMaceInstance;
 
-    protected CustomMaceListener(CustomMace customMaceInstance) {
+    protected CustomMaceHandler(CustomMace customMaceInstance) {
         this.customMaceInstance = customMaceInstance;
         this.abilityCooldownSeconds = customMaceInstance.getAbilityCooldown();
         this.dashCooldownSeconds = customMaceInstance.getDashCooldown();

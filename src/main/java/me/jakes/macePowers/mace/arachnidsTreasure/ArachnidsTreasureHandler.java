@@ -1,6 +1,6 @@
 package me.jakes.macePowers.mace.arachnidsTreasure;
 
-import me.jakes.macePowers.mace.CustomMaceListener;
+import me.jakes.macePowers.mace.CustomMaceHandler;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -10,7 +10,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class ArachnidsTreasureListener extends CustomMaceListener {
+public class ArachnidsTreasureHandler extends CustomMaceHandler {
 
     HashMap<UUID, Long> playerCobwebTimeout = new HashMap<>();
 
@@ -18,7 +18,7 @@ public class ArachnidsTreasureListener extends CustomMaceListener {
 
     private static final int cobwebRadius = 50;
 
-    public ArachnidsTreasureListener() {
+    public ArachnidsTreasureHandler() {
         super(ArachnidsTreasure.getInstance());
     }
 
@@ -29,17 +29,16 @@ public class ArachnidsTreasureListener extends CustomMaceListener {
             return;
         }
 
-        // cycle through set removing old players
-        for (UUID id : playerCobwebTimeout.keySet()) {
-            long timeElapsedSeconds = (System.currentTimeMillis() - playerCobwebTimeout.get(id)) / 1000;
-            if (timeElapsedSeconds >= cobwebTimeoutSeconds) {
-                playerCobwebTimeout.remove(id);
-            } else if (event.getPlayer().getUniqueId() == id) {
-                cancelCobweb(event);
+        if (event.getBlock().getType()==Material.COBWEB) {
+            // cycle through set removing old players
+            for (UUID id : playerCobwebTimeout.keySet()) {
+                long timeElapsedSeconds = (System.currentTimeMillis() - playerCobwebTimeout.get(id)) / 1000;
+                if (timeElapsedSeconds >= cobwebTimeoutSeconds) {
+                    playerCobwebTimeout.remove(id);
+                } else if (event.getPlayer().getUniqueId() == id) {
+                    cancelCobweb(event);
+                }
             }
-        }
-
-        if (event.getBlock().getType() == Material.COBWEB) {
             checkNearbyEntities(event);
         }
     }

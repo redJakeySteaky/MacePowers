@@ -1,6 +1,6 @@
 package me.jakes.macePowers.mace.starWrought;
 
-import me.jakes.macePowers.mace.CustomMaceListener;
+import me.jakes.macePowers.mace.CustomMaceHandler;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -9,9 +9,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class StarWroughtListener extends CustomMaceListener {
+public class StarWroughtHandler extends CustomMaceHandler {
 
-    public StarWroughtListener() {
+    public StarWroughtHandler() {
         super(StarWrought.getInstance());
     }
 

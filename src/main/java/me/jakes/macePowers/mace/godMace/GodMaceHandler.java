@@ -1,7 +1,7 @@
 package me.jakes.macePowers.mace.godMace;
 
 import me.jakes.macePowers.MacePowers;
-import me.jakes.macePowers.mace.CustomMaceListener;
+import me.jakes.macePowers.mace.CustomMaceHandler;
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
 import me.jakes.macePowers.mace.kingsMace.KingsMace;
 import me.jakes.macePowers.mace.starWrought.StarWrought;
@@ -9,6 +9,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -19,14 +20,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class GodMaceListener extends CustomMaceListener {
+public class GodMaceHandler extends CustomMaceHandler {
 
     private final NamespacedKey guiCooldownIdentifier = new NamespacedKey(MacePowers.getPlugin(), "god_mace_gui_cooldown");
     private final int guiCooldownSeconds = GodMace.getInstance().getGuiCooldownSeconds();
 
-    public GodMaceListener() {
+    public GodMaceHandler() {
         super(GodMace.getInstance());
     }
+
+    private int maceChosen = 0;
+    // 0 none
+    // 1 star
+    // 2 arach
+    // 3 king
 
     @Override
     @EventHandler
@@ -39,7 +46,6 @@ public class GodMaceListener extends CustomMaceListener {
                 if (player.isSneaking()) {
                     // if not on cooldown
                     if (isNotOnCooldown(player, guiCooldownIdentifier)) {
-                        startCooldown(player, guiCooldownIdentifier);
                         openGUI(player);
                     } else {
                         // if on cooldown
@@ -50,8 +56,10 @@ public class GodMaceListener extends CustomMaceListener {
                 } else if (player.getOpenInventory().getType() != InventoryType.CRAFTING) {
                     // if not on cooldown
                     if (isNotOnCooldown(player, abilityCooldownIdentifier)) {
-                        startCooldown(player, abilityCooldownIdentifier);
                         applyAbility(player);
+                        if(maceChosen == 0) {
+                            startCooldown(player, abilityCooldownIdentifier);
+                        }
                     } else {
                         // if on cooldown
                         messagePlayerCooldown(player, abilityCooldownIdentifier);
@@ -104,13 +112,24 @@ public class GodMaceListener extends CustomMaceListener {
 
         // Handle buttons by slot or item
         switch (event.getSlot()) {
-            case 2 -> player.sendMessage("You chose StarWrought!");
-            case 4 -> player.sendMessage("You chose Arachnid's Treasure!");
-            case 6 -> player.sendMessage("You chose King's Mace!");
+            case 2 -> {
+                startCooldown(player, guiCooldownIdentifier);
+                player.sendMessage("You chose StarWrought!");
+            }
+            case 4 -> {
+                startCooldown(player, guiCooldownIdentifier);
+                player.sendMessage("You chose Arachnid's Treasure!");
+            }
+            case 6 -> {
+                startCooldown(player, guiCooldownIdentifier);
+                player.sendMessage("You chose King's Mace!");
+            }
             default -> {
+                return;
             } // Do nothing
         }
 
-        player.closeInventory(); // Optional: close after selection
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 1, 1);
+        player.closeInventory();
     }
 }

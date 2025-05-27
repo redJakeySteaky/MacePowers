@@ -1,6 +1,6 @@
 package me.jakes.macePowers.mace.kingsMace;
 
-import me.jakes.macePowers.mace.CustomMaceListener;
+import me.jakes.macePowers.mace.CustomMaceHandler;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -8,9 +8,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class KingsMaceListener extends CustomMaceListener {
+public class KingsMaceHandler extends CustomMaceHandler {
 
-    public KingsMaceListener() {
+    public KingsMaceHandler() {
         super(KingsMace.getInstance());
     }
 

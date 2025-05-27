@@ -1,13 +1,13 @@
 package me.jakes.macePowers;
 
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
-import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasureListener;
-import me.jakes.macePowers.mace.command.GiveCommand;
-import me.jakes.macePowers.mace.godMace.GodMaceListener;
+import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasureHandler;
+import me.jakes.macePowers.command.GiveCommand;
+import me.jakes.macePowers.mace.godMace.GodMaceHandler;
 import me.jakes.macePowers.mace.kingsMace.KingsMace;
-import me.jakes.macePowers.mace.kingsMace.KingsMaceListener;
+import me.jakes.macePowers.mace.kingsMace.KingsMaceHandler;
 import me.jakes.macePowers.mace.starWrought.StarWrought;
-import me.jakes.macePowers.mace.starWrought.StarWroughtListener;
+import me.jakes.macePowers.mace.starWrought.StarWroughtHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,10 +20,10 @@ public final class MacePowers extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new StarWroughtListener(), this);
-        getServer().getPluginManager().registerEvents(new ArachnidsTreasureListener(), this);
-        getServer().getPluginManager().registerEvents(new KingsMaceListener(), this);
-        getServer().getPluginManager().registerEvents(new GodMaceListener(), this);
+        getServer().getPluginManager().registerEvents(new StarWroughtHandler(), this);
+        getServer().getPluginManager().registerEvents(new ArachnidsTreasureHandler(), this);
+        getServer().getPluginManager().registerEvents(new KingsMaceHandler(), this);
+        getServer().getPluginManager().registerEvents(new GodMaceHandler(), this);
 
         registerStarWroughtRecipe();
         registerArachnidsTreasureRecipe();
