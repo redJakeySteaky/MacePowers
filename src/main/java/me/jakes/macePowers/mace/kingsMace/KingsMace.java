@@ -11,7 +11,7 @@ public class KingsMace extends CustomMace {
     private static final KingsMace instance = new KingsMace();
 
     protected KingsMace() {
-        super(Component.text("King's Mace", NamedTextColor.GRAY, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "kings_mace"), 180, 10);
+        super(Component.text("King's Mace", NamedTextColor.YELLOW, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "kings_mace"), 180, 10);
     }
 
     public static KingsMace getInstance() {

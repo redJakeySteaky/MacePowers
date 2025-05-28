@@ -2,6 +2,8 @@ name: MacePowers
 version: '0.0.1'
 main: me.jakes.macePowers.MacePowers
 api-version: '1.21'
+description: Adds maces with custom powers.
+author: Jake Shamp
 
 commands:
   givemace:

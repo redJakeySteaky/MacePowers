@@ -10,6 +10,7 @@ import me.jakes.macePowers.mace.kingsMace.KingsMace;
 import me.jakes.macePowers.mace.kingsMace.KingsMaceHandler;
 import me.jakes.macePowers.mace.starWrought.StarWrought;
 import me.jakes.macePowers.mace.starWrought.StarWroughtHandler;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -178,6 +179,12 @@ public final class MacePowers extends JavaPlugin {
                         break;
                 }
             }
+        }
+    }
+
+    public static void broadcastTitle(Title message) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.showTitle(message);
         }
     }
 }

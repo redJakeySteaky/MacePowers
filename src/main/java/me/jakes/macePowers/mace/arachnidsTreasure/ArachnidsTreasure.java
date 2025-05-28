@@ -12,7 +12,7 @@ public class ArachnidsTreasure extends CustomMace {
     private static final ArachnidsTreasure instance = new ArachnidsTreasure();
 
     protected ArachnidsTreasure() {
-        super(Component.text("Arachnid's Treasure", NamedTextColor.GRAY, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure"), 180, 10);
+        super(Component.text("Arachnid's Treasure", NamedTextColor.WHITE, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure"), 180, 10);
     }
 
     public static ArachnidsTreasure getInstance() {

@@ -64,8 +64,10 @@ public class GodMaceHandler extends CustomMaceHandler {
                     // if not on cooldown
                     if (isNotOnCooldown(player, abilityCooldownIdentifier)) {
                         applyAbility(player);
-                        if(maceChosen != 0) {
+                        if (maceChosen != 0) {
                             startCooldown(player, abilityCooldownIdentifier);
+                        } else {
+                            player.sendMessage("No mace selected. Crouch right-click to select a mace.");
                         }
                     } else {
                         // if on cooldown
@@ -169,13 +171,13 @@ public class GodMaceHandler extends CustomMaceHandler {
 
                 switch (maceChosen) {
                     case 1:
-                        meta.customName(Component.text("GOD Mace (StarWrought)", NamedTextColor.GRAY, TextDecoration.BOLD));
+                        meta.customName(Component.text("GOD Mace (StarWrought)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                     case 2:
-                        meta.customName(Component.text("GOD Mace (Arachnid's Treasure)", NamedTextColor.GRAY, TextDecoration.BOLD));
+                        meta.customName(Component.text("GOD Mace (Arachnid's Treasure)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                     case 3:
-                        meta.customName(Component.text("GOD Mace (King's Mace)", NamedTextColor.GRAY, TextDecoration.BOLD));
+                        meta.customName(Component.text("GOD Mace (King's Mace)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                 }
                 item.setItemMeta(meta);
