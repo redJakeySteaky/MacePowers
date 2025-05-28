@@ -78,6 +78,6 @@
 <hr />
 
 <p align="center">
-  <em>Tested on Paper 1.20.4 and newer</em><br />
+  <em>Tested on Paper 1.21.4</em><br />
   <strong>Developed by Jake</strong>
 </p>
