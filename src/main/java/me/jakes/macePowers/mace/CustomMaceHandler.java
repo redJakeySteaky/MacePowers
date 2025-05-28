@@ -13,6 +13,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -116,7 +117,15 @@ public abstract class CustomMaceHandler implements Listener {
     }
 
     private void applyDash(Player player) {
-        player.setVelocity(player.getLocation().getDirection().normalize().multiply(2).setY(.5));
+        Vector velocity = player.getLocation().getDirection().normalize().multiply(2);
+
+        // min and max y velocities
+        if (velocity.getY() < .5) {
+            velocity.setY(.5);
+        } else if (velocity.getY() > 1.5) {
+            velocity.setY(1.5);
+        }
+        player.setVelocity(velocity);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WIND_CHARGE_WIND_BURST, 1, 1);
         player.getWorld().spawnParticle(Particle.GUST_EMITTER_SMALL, player.getLocation(), 1);
     }

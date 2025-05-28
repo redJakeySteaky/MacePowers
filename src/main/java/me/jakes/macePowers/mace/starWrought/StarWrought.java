@@ -12,7 +12,7 @@ public class StarWrought extends CustomMace {
     private static final StarWrought instance = new StarWrought();
 
     protected StarWrought() {
-        super(Component.text("StarWrought", NamedTextColor.GRAY, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "starwrought"), 180, 10);
+        super(Component.text("StarWrought", NamedTextColor.BLUE, TextDecoration.BOLD), new NamespacedKey(MacePowers.getPlugin(), "starwrought"), 180, 10);
     }
 
     public static StarWrought getInstance() {

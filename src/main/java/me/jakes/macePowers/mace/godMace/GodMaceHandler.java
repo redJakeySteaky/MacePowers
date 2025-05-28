@@ -1,11 +1,17 @@
 package me.jakes.macePowers.mace.godMace;
 
+import me.jakes.macePowers.DataManager;
 import me.jakes.macePowers.MacePowers;
 import me.jakes.macePowers.mace.CustomMaceHandler;
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
+import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasureHandler;
 import me.jakes.macePowers.mace.kingsMace.KingsMace;
+import me.jakes.macePowers.mace.kingsMace.KingsMaceHandler;
 import me.jakes.macePowers.mace.starWrought.StarWrought;
+import me.jakes.macePowers.mace.starWrought.StarWroughtHandler;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -19,6 +25,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class GodMaceHandler extends CustomMaceHandler {
 
@@ -57,8 +64,10 @@ public class GodMaceHandler extends CustomMaceHandler {
                     // if not on cooldown
                     if (isNotOnCooldown(player, abilityCooldownIdentifier)) {
                         applyAbility(player);
-                        if(maceChosen == 0) {
+                        if (maceChosen != 0) {
                             startCooldown(player, abilityCooldownIdentifier);
+                        } else {
+                            player.sendMessage("No mace selected. Crouch right-click to select a mace.");
                         }
                     } else {
                         // if on cooldown
@@ -72,7 +81,23 @@ public class GodMaceHandler extends CustomMaceHandler {
 
     @Override
     protected void applyAbility(Player player) {
-        player.sendMessage("ability");
+        // class has not selected maceChosen yet, so check data.yml for it (default 0)
+        if (maceChosen == 0) {
+            maceChosen = DataManager.getInstance().getMaceChosen(player);
+        }
+
+
+        switch (maceChosen) {
+            case 1:
+                StarWroughtHandler.boostAbility(player);
+                break;
+            case 2:
+                ArachnidsTreasureHandler.cobWebAbility(player);
+                break;
+            case 3:
+                KingsMaceHandler.strengthAbility(player);
+                break;
+        }
     }
 
     private void openGUI(Player player) {
@@ -113,23 +138,50 @@ public class GodMaceHandler extends CustomMaceHandler {
         // Handle buttons by slot or item
         switch (event.getSlot()) {
             case 2 -> {
-                startCooldown(player, guiCooldownIdentifier);
+                maceChosen = 1;
                 player.sendMessage("You chose StarWrought!");
             }
             case 4 -> {
-                startCooldown(player, guiCooldownIdentifier);
+                maceChosen = 2;
                 player.sendMessage("You chose Arachnid's Treasure!");
             }
             case 6 -> {
-                startCooldown(player, guiCooldownIdentifier);
+                maceChosen = 3;
                 player.sendMessage("You chose King's Mace!");
             }
             default -> {
                 return;
-            } // Do nothing
+            } // Do nothing if a mace is not selected
         }
+
+        startCooldown(player, guiCooldownIdentifier);
+
+        updateMaceName(player);
+        DataManager.getInstance().saveMaceChosen(player, maceChosen);
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 1, 1);
         player.closeInventory();
+    }
+
+    private void updateMaceName(Player player) {
+        for (ItemStack item : player.getInventory().getContents()) {
+            if (item == null || !item.hasItemMeta()) continue;
+            if (item.getPersistentDataContainer().has(customMaceInstance.getIdentifier())) {
+                ItemMeta meta = item.getItemMeta();
+
+                switch (maceChosen) {
+                    case 1:
+                        meta.customName(Component.text("GOD Mace (StarWrought)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        break;
+                    case 2:
+                        meta.customName(Component.text("GOD Mace (Arachnid's Treasure)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        break;
+                    case 3:
+                        meta.customName(Component.text("GOD Mace (King's Mace)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        break;
+                }
+                item.setItemMeta(meta);
+            }
+        }
     }
 }
