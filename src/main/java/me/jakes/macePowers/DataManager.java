@@ -11,7 +11,8 @@ public class DataManager {
     private File file;
     private YamlConfiguration config;
 
-    private DataManager() {}
+    private DataManager() {
+    }
 
     public static DataManager getInstance() {
         return instance;
@@ -61,4 +62,14 @@ public class DataManager {
     public boolean getStageInitiated(int stage) {
         return config.getBoolean("stages-initiated." + stage);
     }
+
+    public void setKillCount(int mace, int kills) {
+        config.set("killcount." + mace, kills);
+        save();
+    }
+
+    public int getKillCount(int mace) {
+        return config.getInt("killcount." + mace, 0);
+    }
+
 }

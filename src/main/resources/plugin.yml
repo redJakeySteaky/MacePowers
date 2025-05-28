@@ -1,5 +1,5 @@
 name: MacePowers
-version: '1.0.2'
+version: '1.0.3'
 main: me.jakes.macePowers.MacePowers
 api-version: '1.21'
 description: Adds maces with custom powers.
@@ -17,6 +17,10 @@ commands:
     usage: /cooldown
     permission: macepowers.cooldown
     description: Removes any cooldowns you have.
+  killcount:
+    usage: /killcount <mace>
+    permission: macepowers.killcount
+    description: Displays killcount
 
 permissions:
   macepowers.givemace:
@@ -28,3 +32,6 @@ permissions:
   macepowers.cooldown:
     description: Allows use of /cooldown
     default: op
+  macepowers.killcount:
+    description: Allows use of /killcount
+    default: true
