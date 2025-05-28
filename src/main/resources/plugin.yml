@@ -1,5 +1,5 @@
 name: MacePowers
-version: '0.0.1'
+version: '1.0.0'
 main: me.jakes.macePowers.MacePowers
 api-version: '1.21'
 description: Adds maces with custom powers.
