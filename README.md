@@ -1,4 +1,5 @@
 <b>MacePowers Plugin </b>
+
 Commands
 /givemace <item>
 Gives a player one of the custom maces.
