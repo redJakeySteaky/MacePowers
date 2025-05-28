@@ -63,13 +63,40 @@ public class DataManager {
         return config.getBoolean("stages-initiated." + stage);
     }
 
-    public void setKillCount(int mace, int kills) {
+    public void setMaceKillCount(int mace, int kills) {
         config.set("killcount." + mace, kills);
         save();
     }
 
-    public int getKillCount(int mace) {
+    public int getMaceKillCount(int mace) {
         return config.getInt("killcount." + mace, 0);
+    }
+
+    public void setPlayerTotalKillCount(Player player, int kills) {
+        config.set("killcount." + player.getUniqueId() + ".total", kills);
+        save();
+    }
+
+    public int getPlayerTotalKillCount(Player player) {
+        return config.getInt("killcount." + player.getUniqueId() + ".total", 0);
+    }
+
+    public void setPlayerMaceKillCount(Player player, int kills, int mace) {
+        config.set("killcount." + player.getUniqueId() + "." + mace, kills);
+        save();
+    }
+
+    public int getPlayerMaceKillCount(Player player, int mace) {
+        return config.getInt("killcount." + player.getUniqueId() + "." + mace, 0);
+    }
+
+    public void setTotalKillCount(int kills) {
+        config.set("killcount.total", kills);
+        save();
+    }
+
+    public int getTotalKillCount() {
+        return config.getInt("killcount.total", 0);
     }
 
 }

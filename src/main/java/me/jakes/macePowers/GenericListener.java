@@ -1,5 +1,9 @@
 package me.jakes.macePowers;
 
+import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
+import me.jakes.macePowers.mace.godMace.GodMace;
+import me.jakes.macePowers.mace.kingsMace.KingsMace;
+import me.jakes.macePowers.mace.starWrought.StarWrought;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Material;
@@ -41,30 +45,46 @@ public class GenericListener implements Listener {
         Player victim = event.getPlayer();
         Player killer = victim.getKiller();
         if (killer != null) {
-            boolean added = false;
             ItemStack item = killer.getInventory().getItemInMainHand();
             if (item.getType() == Material.MACE && item.hasItemMeta()) {
-                if (item.getPersistentDataContainer().has(new NamespacedKey(MacePowers.getPlugin(), "starwrought"))) {
-                    addKillCount(1);
-                    added = true;
-                } else if (item.getPersistentDataContainer().has(new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure"))) {
-                    addKillCount(2);
-                    added = true;
-                } else if (item.getPersistentDataContainer().has(new NamespacedKey(MacePowers.getPlugin(), "kings_mace"))) {
-                    addKillCount(3);
-                    added = true;
-                } else if (item.getPersistentDataContainer().has(new NamespacedKey(MacePowers.getPlugin(), "god_mace"))) {
-                    addKillCount(4);
-                    added = true;
+                if (item.getPersistentDataContainer().has(StarWrought.getInstance().getIdentifier())) {
+                    addKillCount(killer, 1);
+                } else if (item.getPersistentDataContainer().has(ArachnidsTreasure.getInstance().getIdentifier())) {
+                    addKillCount(killer, 2);
+                } else if (item.getPersistentDataContainer().has(KingsMace.getInstance().getIdentifier())) {
+                    addKillCount(killer, 3);
+                } else if (item.getPersistentDataContainer().has(GodMace.getInstance().getIdentifier())) {
+                    addKillCount(killer, 4);
                 }
             }
-            if (!added) {
-                addKillCount(5);
-            }
+
+
+            // add to total count
+            addTotalKill();
+            // add to player total count
+            addPlayerTotalKill(killer);
         }
     }
 
-    private void addKillCount(int mace) {
-        DataManager.getInstance().setKillCount(mace, DataManager.getInstance().getKillCount(mace) + 1);
+    private void addKillCount(Player killer, int mace) {
+        addPlayerMaceKill(killer, mace);
+        addMaceKillCount(mace);
+    }
+
+    private void addPlayerTotalKill(Player killer) {
+        DataManager.getInstance().setPlayerTotalKillCount(killer, DataManager.getInstance().getPlayerTotalKillCount(killer) + 1);
+    }
+
+    private void addPlayerMaceKill(Player killer, int mace) {
+        // add to player mace count
+        DataManager.getInstance().setPlayerMaceKillCount(killer, DataManager.getInstance().getPlayerMaceKillCount(killer, mace) + 1, mace);
+    }
+
+    private void addMaceKillCount(int mace) {
+        DataManager.getInstance().setMaceKillCount(mace, DataManager.getInstance().getMaceKillCount(mace) + 1);
+    }
+
+    private void addTotalKill() {
+        DataManager.getInstance().setTotalKillCount(DataManager.getInstance().getTotalKillCount() + 1);
     }
 }
