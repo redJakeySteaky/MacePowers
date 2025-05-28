@@ -52,4 +52,13 @@ public class DataManager {
     public int getMaceChosen(Player player) {
         return config.getInt("players." + player.getUniqueId() + ".maceChosen", 0);
     }
+
+    public void saveStageInitiated(int stage, boolean bool) {
+        config.set("stages-initiated." + stage, bool);
+        save();
+    }
+
+    public boolean getStageInitiated(int stage) {
+        return config.getBoolean("stages-initiated." + stage);
+    }
 }

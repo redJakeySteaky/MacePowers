@@ -1,8 +1,10 @@
 package me.jakes.macePowers;
 
+import me.jakes.macePowers.command.GiveMaceCommand;
+import me.jakes.macePowers.command.StageCommand;
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasureHandler;
-import me.jakes.macePowers.command.GiveCommand;
+import me.jakes.macePowers.mace.godMace.GodMace;
 import me.jakes.macePowers.mace.godMace.GodMaceHandler;
 import me.jakes.macePowers.mace.kingsMace.KingsMace;
 import me.jakes.macePowers.mace.kingsMace.KingsMaceHandler;
@@ -11,6 +13,7 @@ import me.jakes.macePowers.mace.starWrought.StarWroughtHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,11 +30,32 @@ public final class MacePowers extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new KingsMaceHandler(), this);
         getServer().getPluginManager().registerEvents(new GodMaceHandler(), this);
 
-        registerStarWroughtRecipe();
-        registerArachnidsTreasureRecipe();
-        registerKingsMaceRecipe();
+        Objects.requireNonNull(getCommand("givemace")).setExecutor(new GiveMaceCommand());
+        Objects.requireNonNull(getCommand("stage")).setExecutor(new StageCommand());
 
-        Objects.requireNonNull(getCommand("macepowers")).setExecutor(new GiveCommand());
+        //initiate stages from data.yml
+        for (int stage = 1; stage <= 4; stage++) {
+            if (DataManager.getInstance().getStageInitiated(stage)) {
+                switch (stage) {
+                    case 1:
+                        registerStarWroughtRecipe();
+                        getLogger().info("Initiating Stage 1");
+                        break;
+                    case 2:
+                        registerArachnidsTreasureRecipe();
+                        getLogger().info("Initiating Stage 2");
+                        break;
+                    case 3:
+                        registerKingsMaceRecipe();
+                        getLogger().info("Initiating Stage 3");
+                        break;
+                    case 4:
+                        registerGodMaceRecipe();
+                        getLogger().info("Initiating Stage 4");
+                        break;
+                }
+            }
+        }
 
         getLogger().info("MacePowers Successfully Loaded!");
     }
@@ -45,8 +69,12 @@ public final class MacePowers extends JavaPlugin {
         return JavaPlugin.getPlugin(MacePowers.class);
     }
 
-    private void registerStarWroughtRecipe() {
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(MacePowers.getPlugin(), "starwrought_recipe"), StarWrought.getInstance().getMace());
+    public static void registerStarWroughtRecipe() {
+        NamespacedKey key = new NamespacedKey(MacePowers.getPlugin(), "starwrought_recipe");
+        if (Bukkit.getRecipe(key) != null) {
+            return;
+        }
+        ShapedRecipe recipe = new ShapedRecipe(key, StarWrought.getInstance().getMace());
         recipe.shape(
                 "KFK",
                 "RCR",
@@ -59,8 +87,13 @@ public final class MacePowers extends JavaPlugin {
         Bukkit.addRecipe(recipe);
     }
 
-    private void registerArachnidsTreasureRecipe() {
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure_recipe"), ArachnidsTreasure.getInstance().getMace());
+    public static void registerArachnidsTreasureRecipe() {
+        NamespacedKey key = new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure_recipe");
+        if (Bukkit.getRecipe(key) != null) {
+            return;
+        }
+
+        ShapedRecipe recipe = new ShapedRecipe(key, ArachnidsTreasure.getInstance().getMace());
         recipe.shape(
                 "KWO",
                 "BCB",
@@ -74,8 +107,13 @@ public final class MacePowers extends JavaPlugin {
         Bukkit.addRecipe(recipe);
     }
 
-    private void registerKingsMaceRecipe() {
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(MacePowers.getPlugin(), "kings_mace_recipe"), KingsMace.getInstance().getMace());
+    public static void registerKingsMaceRecipe() {
+        NamespacedKey key = new NamespacedKey(MacePowers.getPlugin(), "kings_mace_recipe");
+        if (Bukkit.getRecipe(key) != null) {
+            return;
+        }
+
+        ShapedRecipe recipe = new ShapedRecipe(key, KingsMace.getInstance().getMace());
         recipe.shape(
                 "GTG",
                 "KCK",
@@ -86,5 +124,60 @@ public final class MacePowers extends JavaPlugin {
         recipe.setIngredient('T', Material.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE);
         recipe.setIngredient('C', Material.HEAVY_CORE);
         Bukkit.addRecipe(recipe);
+    }
+
+    public static void registerGodMaceRecipe() {
+        NamespacedKey key = new NamespacedKey(MacePowers.getPlugin(), "god_mace_recipe");
+        if (Bukkit.getRecipe(key) != null) {
+            return;
+        }
+
+
+        ShapedRecipe recipe = new ShapedRecipe(key, GodMace.getInstance().getMace());
+
+        recipe.shape(
+                " A ",
+                "SBK",
+                "DDD"
+        );
+        recipe.setIngredient('A', ArachnidsTreasure.getInstance().getMace());
+        recipe.setIngredient('S', StarWrought.getInstance().getMace());
+        recipe.setIngredient('K', KingsMace.getInstance().getMace());
+        recipe.setIngredient('B', Material.BEACON);
+        recipe.setIngredient('D', Material.DIAMOND_BLOCK);
+        Bukkit.addRecipe(recipe);
+    }
+
+    public static void removeRecipes() {
+        NamespacedKey key1 = new NamespacedKey(MacePowers.getPlugin(), "starwrought_recipe");
+        NamespacedKey key2 = new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure_recipe");
+        NamespacedKey key3 = new NamespacedKey(MacePowers.getPlugin(), "kings_mace_recipe");
+        NamespacedKey key4 = new NamespacedKey(MacePowers.getPlugin(), "god_mace_recipe");
+
+        Bukkit.removeRecipe(key1);
+        Bukkit.removeRecipe(key2);
+        Bukkit.removeRecipe(key3);
+        Bukkit.removeRecipe(key4);
+    }
+
+    public static void checkAndDiscoverRecipes(Player p) {
+        for (int stage = 1; stage <= 4; stage++) {
+            if (DataManager.getInstance().getStageInitiated(stage)) {
+                switch (stage) {
+                    case 1:
+                        p.discoverRecipe(new NamespacedKey(MacePowers.getPlugin(), "starwrought_recipe"));
+                        break;
+                    case 2:
+                        p.discoverRecipe(new NamespacedKey(MacePowers.getPlugin(), "arachnids_treasure_recipe"));
+                        break;
+                    case 3:
+                        p.discoverRecipe(new NamespacedKey(MacePowers.getPlugin(), "kings_mace_recipe"));
+                        break;
+                    case 4:
+                        p.discoverRecipe(new NamespacedKey(MacePowers.getPlugin(), "god_mace_recipe"));
+                        break;
+                }
+            }
+        }
     }
 }

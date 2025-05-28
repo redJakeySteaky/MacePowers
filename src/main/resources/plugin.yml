@@ -4,6 +4,18 @@ main: me.jakes.macePowers.MacePowers
 api-version: '1.21'
 
 commands:
-  macepowers:
-    description: Mace Powers command
-    usage: /macepowers give <item>
+  givemace:
+    usage: /givemace <item>
+    permission: macepowers.givemace
+  stage:
+    usage: /stage <stageNumber>
+    permission: macepowers.stage
+    description: Initiate a stage by sending players a message and unlocking a crafting recipe per stage
+
+permissions:
+  macepowers.givemace:
+    description: Allows use of /givemace <item> command
+    default: op
+  macepowers.stage:
+    description: Allows use of /stage <stageNumber> command
+    default: op

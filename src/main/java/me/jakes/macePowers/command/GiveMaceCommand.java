@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class GiveCommand implements CommandExecutor, TabCompleter {
+public class GiveMaceCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
@@ -25,12 +25,12 @@ public class GiveCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (args.length != 2 || !args[0].equalsIgnoreCase("give")) {
-            player.sendMessage("Usage: /macepowers give <item>");
+        if (args.length != 1) {
+            player.sendMessage("Usage: /givemace  <item>");
             return true;
         }
 
-        String itemName = args[1].toLowerCase();
+        String itemName = args[0].toLowerCase();
         ItemStack item = switch (itemName) {
             case "starwrought" -> StarWrought.getInstance().getMace();
             case "arachnidstreasure" -> ArachnidsTreasure.getInstance().getMace();
@@ -52,11 +52,8 @@ public class GiveCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         if (args.length == 1) {
-            return List.of("give");
-        }
-        if (args.length == 2 && args[0].equalsIgnoreCase("give")) {
             return Stream.of("starwrought", "arachnidstreasure", "kingsmace", "godmace")
-                    .filter(s -> s.startsWith(args[1].toLowerCase()))
+                    .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .toList();
         }
         return Collections.emptyList();
