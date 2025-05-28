@@ -58,7 +58,7 @@ public class GenericListener implements Listener {
                 }
             }
 
-
+            //regardless if mace
             // add to total count
             addTotalKill();
             // add to player total count
