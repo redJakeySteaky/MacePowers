@@ -28,7 +28,7 @@ public class CustomMace {
         this.identifier = identifier;
         itemStack = new ItemStack(Material.MACE);
         ItemMeta meta = itemStack.getItemMeta();
-        meta.customName(name);
+        meta.displayName(name);
         meta.getPersistentDataContainer().set(identifier, PersistentDataType.BOOLEAN, true);
         itemStack.setItemMeta(meta);
 

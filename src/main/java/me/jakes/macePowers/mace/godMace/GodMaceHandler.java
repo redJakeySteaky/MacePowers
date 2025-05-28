@@ -60,7 +60,7 @@ public class GodMaceHandler extends CustomMaceHandler {
                     }
 
                     //check to make sure gui is not open
-                } else if (player.getOpenInventory().getType() != InventoryType.CRAFTING) {
+                } else if (player.getOpenInventory().getType() == InventoryType.CRAFTING) {
                     // if not on cooldown
                     if (isNotOnCooldown(player, abilityCooldownIdentifier)) {
                         applyAbility(player);
@@ -171,13 +171,13 @@ public class GodMaceHandler extends CustomMaceHandler {
 
                 switch (maceChosen) {
                     case 1:
-                        meta.customName(Component.text("GOD Mace (StarWrought)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        meta.displayName(Component.text("GOD Mace (StarWrought)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                     case 2:
-                        meta.customName(Component.text("GOD Mace (Arachnid's Treasure)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        meta.displayName(Component.text("GOD Mace (Arachnid's Treasure)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                     case 3:
-                        meta.customName(Component.text("GOD Mace (King's Mace)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+                        meta.displayName(Component.text("GOD Mace (King's Mace)", NamedTextColor.DARK_RED, TextDecoration.BOLD));
                         break;
                 }
                 item.setItemMeta(meta);

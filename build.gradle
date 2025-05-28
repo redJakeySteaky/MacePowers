@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'me.jakes'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -27,7 +27,7 @@ tasks {
         // Configure the Minecraft version for our task.
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21.4")
+        minecraftVersion("1.21")
     }
 }
 
@@ -59,5 +59,5 @@ processResources {
 }
 
 jar {
-    destinationDirectory = file("C:\\servers\\Paper 1.21.4\\plugins")
+    destinationDirectory = file("C:\\servers\\Paper 1.21.1\\plugins")
 }
