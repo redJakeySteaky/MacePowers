@@ -117,13 +117,13 @@ public abstract class CustomMaceHandler implements Listener {
     }
 
     private void applyDash(Player player) {
-        Vector velocity = player.getLocation().getDirection().normalize().multiply(2);
+        Vector velocity = player.getLocation().getDirection().normalize().multiply(3);
 
         // min and max y velocities
-        if (velocity.getY() < .5) {
-            velocity.setY(.5);
-        } else if (velocity.getY() > 1.5) {
-            velocity.setY(1.5);
+        if (velocity.getY() < .75) {
+            velocity.setY(.75);
+        } else if (velocity.getY() > 1.75) {
+            velocity.setY(1.75);
         }
         player.setVelocity(velocity);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WIND_CHARGE_WIND_BURST, 1, 1);

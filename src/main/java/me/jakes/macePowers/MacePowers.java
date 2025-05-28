@@ -1,5 +1,6 @@
 package me.jakes.macePowers;
 
+import me.jakes.macePowers.command.CooldownCommand;
 import me.jakes.macePowers.command.GiveMaceCommand;
 import me.jakes.macePowers.command.StageCommand;
 import me.jakes.macePowers.mace.arachnidsTreasure.ArachnidsTreasure;
@@ -34,6 +35,7 @@ public final class MacePowers extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("givemace")).setExecutor(new GiveMaceCommand());
         Objects.requireNonNull(getCommand("stage")).setExecutor(new StageCommand());
+        Objects.requireNonNull(getCommand("cooldown")).setExecutor(new CooldownCommand());
 
         //initiate stages from data.yml
         for (int stage = 1; stage <= 4; stage++) {

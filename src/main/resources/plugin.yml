@@ -1,5 +1,5 @@
 name: MacePowers
-version: '1.0.1'
+version: '1.0.2'
 main: me.jakes.macePowers.MacePowers
 api-version: '1.21'
 description: Adds maces with custom powers.
@@ -13,6 +13,10 @@ commands:
     usage: /stage <stageNumber>
     permission: macepowers.stage
     description: Initiate a stage by sending players a message and unlocking a crafting recipe per stage
+  cooldown:
+    usage: /cooldown
+    permission: macepowers.cooldown
+    description: Removes any cooldowns you have.
 
 permissions:
   macepowers.givemace:
@@ -20,4 +24,7 @@ permissions:
     default: op
   macepowers.stage:
     description: Allows use of /stage <stageNumber> command
+    default: op
+  macepowers.cooldown:
+    description: Allows use of /cooldown
     default: op

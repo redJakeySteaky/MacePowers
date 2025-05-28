@@ -60,7 +60,7 @@ public class GodMaceHandler extends CustomMaceHandler {
                     }
 
                     //check to make sure gui is not open
-                } else if (player.getOpenInventory().getType() == InventoryType.CRAFTING) {
+                } else if (player.getOpenInventory().getType() == InventoryType.CRAFTING || player.getOpenInventory().getType() == InventoryType.CREATIVE) {
                     // if not on cooldown
                     if (isNotOnCooldown(player, abilityCooldownIdentifier)) {
                         applyAbility(player);
