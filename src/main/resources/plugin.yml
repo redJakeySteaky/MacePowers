@@ -33,5 +33,5 @@ permissions:
     description: Allows use of /cooldown
     default: op
   macepowers.killcount:
-    description: Allows use of /killcount
+    description: Allows use of /killcount <item>
     default: true
