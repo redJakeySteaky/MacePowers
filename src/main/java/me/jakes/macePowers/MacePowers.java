@@ -30,6 +30,7 @@ public final class MacePowers extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ArachnidsTreasureHandler(), this);
         getServer().getPluginManager().registerEvents(new KingsMaceHandler(), this);
         getServer().getPluginManager().registerEvents(new GodMaceHandler(), this);
+        getServer().getPluginManager().registerEvents(new GenericListener(), this);
 
         Objects.requireNonNull(getCommand("givemace")).setExecutor(new GiveMaceCommand());
         Objects.requireNonNull(getCommand("stage")).setExecutor(new StageCommand());
