@@ -1,57 +1,83 @@
-<b>MacePowers Plugin </b>
+<h1 align="center">MacePowers Plugin</h1>
 
-Commands
-/givemace <item>
-Gives a player one of the custom maces.
+<p align="center">
+  <strong>Custom event-based maces and stage progression system for Minecraft servers.</strong>
+</p>
 
-Permission: macepowers.givemace (default: op)
-Usage: /givemace <item>
+<hr />
 
-Available Items:
+<h2>🔧 Commands</h2>
 
-starwrought
+<h3><code>/givemace &lt;item&gt;</code></h3>
+<p>Gives a player one of the custom maces.</p>
 
-arachnidstreasure
+<ul>
+  <li><strong>Permission:</strong> <code>macepowers.givemace</code> (default: <code>op</code>)</li>
+  <li><strong>Usage:</strong> <code>/givemace &lt;item&gt;</code></li>
+</ul>
 
-kingsmace
+<p><strong>Available Items:</strong></p>
+<ul>
+  <li><code>starwrought</code></li>
+  <li><code>arachnidstreasure</code></li>
+  <li><code>kingsmace</code></li>
+  <li><code>godmace</code></li>
+</ul>
 
-godmace
+<pre><code>/givemace starwrought</code></pre>
 
-Example:
+<hr />
 
-bash
-Copy
-Edit
-/givemace starwrought
-/stage <stageNumber>
-Initiates a stage in the event, broadcasting a title and unlocking crafting recipes.
+<h3><code>/stage &lt;stageNumber&gt;</code></h3>
+<p>Initiates a stage in the event, broadcasting a title and unlocking a crafting recipe.</p>
 
-Permission: macepowers.stage (default: op)
-Usage: /stage <stageNumber>
+<ul>
+  <li><strong>Permission:</strong> <code>macepowers.stage</code> (default: <code>op</code>)</li>
+  <li><strong>Usage:</strong> <code>/stage &lt;stageNumber&gt;</code></li>
+</ul>
 
-Stages:
+<p><strong>Stages:</strong></p>
+<ul>
+  <li><code>start</code> — Broadcasts <em>Event Started!</em></li>
+  <li><code>1</code> — Unlocks <em>StarWrought</em> recipe</li>
+  <li><code>2</code> — Unlocks <em>Arachnid’s Treasure</em> recipe</li>
+  <li><code>3</code> — Unlocks <em>King’s Mace</em> recipe</li>
+  <li><code>4</code> — Unlocks <em>God Mace</em> recipe</li>
+  <li><code>end</code> — Broadcasts <em>Thank You For Playing!</em></li>
+  <li><code>reset-recipes</code> — Disables all unlocked recipes</li>
+</ul>
 
-start — Broadcasts "Event Started!"
+<pre><code>/stage 2</code></pre>
 
-1 — Unlocks StarWrought recipe
+<hr />
 
-2 — Unlocks Arachnid’s Treasure recipe
+<h2>🔐 Permissions</h2>
 
-3 — Unlocks King’s Mace recipe
+<table>
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>macepowers.givemace</code></td>
+      <td>Allows use of <code>/givemace</code></td>
+      <td>OP</td>
+    </tr>
+    <tr>
+      <td><code>macepowers.stage</code></td>
+      <td>Allows use of <code>/stage</code></td>
+      <td>OP</td>
+    </tr>
+  </tbody>
+</table>
 
-4 — Unlocks God Mace recipe
+<hr />
 
-end — Broadcasts "Thank You For Playing!"
-
-reset-recipes — Disables all unlocked recipes
-
-Example:
-
-bash
-Copy
-Edit
-/stage 2
-Permissions
-Permission	Description	Default
-macepowers.givemace	Allows use of /givemace	OP
-macepowers.stage	Allows use of /stage	OP
+<p align="center">
+  <em>Tested on Paper 1.20.4 and newer</em><br />
+  <strong>Developed by Jake</strong>
+</p>
