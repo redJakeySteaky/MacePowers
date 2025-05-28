@@ -20,6 +20,8 @@ public final class MacePowers extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        DataManager.getInstance().setup();
+
         getServer().getPluginManager().registerEvents(new StarWroughtHandler(), this);
         getServer().getPluginManager().registerEvents(new ArachnidsTreasureHandler(), this);
         getServer().getPluginManager().registerEvents(new KingsMaceHandler(), this);
@@ -29,7 +31,6 @@ public final class MacePowers extends JavaPlugin {
         registerArachnidsTreasureRecipe();
         registerKingsMaceRecipe();
 
-        Objects.requireNonNull(getCommand("macepowers")).setExecutor(new GiveCommand());
         Objects.requireNonNull(getCommand("macepowers")).setExecutor(new GiveCommand());
 
         getLogger().info("MacePowers Successfully Loaded!");

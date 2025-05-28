@@ -36,6 +36,7 @@ public class ArachnidsTreasureHandler extends CustomMaceHandler {
                 if (timeElapsedSeconds >= cobwebTimeoutSeconds) {
                     playerCobwebTimeout.remove(id);
                 } else if (event.getPlayer().getUniqueId() == id) {
+                    // canceling event if player placing cobweb is player who initiated ability
                     cancelCobweb(event);
                 }
             }

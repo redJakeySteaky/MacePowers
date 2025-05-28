@@ -27,7 +27,7 @@ public class StarWroughtHandler extends CustomMaceHandler {
         player.getWorld().spawnParticle(Particle.GUST_EMITTER_LARGE, player.getLocation(), 2);
 
         for (Entity entity : player.getNearbyEntities(10, 10, 10)) {
-            if (entity instanceof Player nearbyPlayer) {
+            if (entity instanceof Player nearbyPlayer && nearbyPlayer.getLocation().distance(player.getLocation()) <= 10) {
                 nearbyPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 200, 1));
             }
         }
