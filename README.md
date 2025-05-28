@@ -9,7 +9,7 @@
 <h2>🔧 Commands</h2>
 
 <h3><code>/givemace &lt;item&gt;</code></h3>
-<p>Gives a player one of the custom maces.</p>
+<p>Gives yousself one of the custom maces.</p>
 
 <ul>
   <li><strong>Permission:</strong> <code>macepowers.givemace</code> (default: <code>op</code>)</li>
